@@ -4,8 +4,8 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\Git\CS4790\assignment-05-AlexHamlet\BlabberApp\BlabberApp.ServicesTest\tools\.store\.stage\p4gcjzpm.vdr</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Alex\Git\CS4790\assignment-05-AlexHamlet\BlabberApp\BlabberApp.ServicesTest\tools\.store\.stage\p4gcjzpm.vdr</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\Git\CS4790\assignment-05-R10NGW\BlabberApp\BlabberApp.ServicesTest\tools\.store\.stage\p4gcjzpm.vdr</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\R10NGW\Git\CS4790\assignment-05-R10NGW\BlabberApp\BlabberApp.ServicesTest\tools\.store\.stage\p4gcjzpm.vdr</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">DotnetToolReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.5.0</NuGetToolVersion>
   </PropertyGroup>
@@ -13,6 +13,6 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <Pkgdotnet-reportgenerator-globaltool Condition=" '$(Pkgdotnet-reportgenerator-globaltool)' == '' ">C:\Users\Alex\Git\CS4790\assignment-05-AlexHamlet\BlabberApp\BlabberApp.ServicesTest\tools\.store\.stage\p4gcjzpm.vdr\dotnet-reportgenerator-globaltool\4.5.6</Pkgdotnet-reportgenerator-globaltool>
+    <Pkgdotnet-reportgenerator-globaltool Condition=" '$(Pkgdotnet-reportgenerator-globaltool)' == '' ">C:\Users\R10NGW\Git\CS4790\assignment-05-R10NGW\BlabberApp\BlabberApp.ServicesTest\tools\.store\.stage\p4gcjzpm.vdr\dotnet-reportgenerator-globaltool\4.5.6</Pkgdotnet-reportgenerator-globaltool>
   </PropertyGroup>
 </Project>

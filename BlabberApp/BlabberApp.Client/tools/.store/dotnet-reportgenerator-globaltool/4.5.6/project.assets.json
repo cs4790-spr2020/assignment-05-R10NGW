@@ -130,19 +130,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Alex\\Desktop\\MISC School\\CS 4790\\assignment-05-R10NGW\\BlabberApp\\BlabberApp.Client\\tools\\.store\\.stage\\c3tt3e1i.eki": {}
+    "C:\\Users\\R10NGW\\Desktop\\MISC School\\CS 4790\\assignment-05-R10NGW\\BlabberApp\\BlabberApp.Client\\tools\\.store\\.stage\\c3tt3e1i.eki": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alex\\AppData\\Local\\Temp\\regjsnex.13d\\restore.csproj",
+      "projectUniqueName": "C:\\Users\\R10NGW\\AppData\\Local\\Temp\\regjsnex.13d\\restore.csproj",
       "projectName": "restore",
-      "projectPath": "C:\\Users\\Alex\\AppData\\Local\\Temp\\regjsnex.13d\\restore.csproj",
-      "packagesPath": "C:\\Users\\Alex\\Desktop\\MISC School\\CS 4790\\assignment-05-R10NGW\\BlabberApp\\BlabberApp.Client\\tools\\.store\\.stage\\c3tt3e1i.eki",
-      "outputPath": "C:\\Users\\Alex\\Desktop\\MISC School\\CS 4790\\assignment-05-R10NGW\\BlabberApp\\BlabberApp.Client\\tools\\.store\\.stage\\c3tt3e1i.eki\\",
+      "projectPath": "C:\\Users\\R10NGW\\AppData\\Local\\Temp\\regjsnex.13d\\restore.csproj",
+      "packagesPath": "C:\\Users\\R10NGW\\Desktop\\MISC School\\CS 4790\\assignment-05-R10NGW\\BlabberApp\\BlabberApp.Client\\tools\\.store\\.stage\\c3tt3e1i.eki",
+      "outputPath": "C:\\Users\\R10NGW\\Desktop\\MISC School\\CS 4790\\assignment-05-R10NGW\\BlabberApp\\BlabberApp.Client\\tools\\.store\\.stage\\c3tt3e1i.eki\\",
       "projectStyle": "DotnetToolReference",
       "configFilePaths": [
-        "C:\\Users\\Alex\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\R10NGW\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
