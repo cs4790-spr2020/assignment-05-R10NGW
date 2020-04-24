@@ -4,40 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using BlabberApp.Services;
 using BlabberApp.Domain.Entities;
-using BlabberApp.Services.Interfaces;
-
 
 namespace BlabberApp.Client.Pages
 {
     public class RegisterModel : PageModel
     {
-        //Attributes
-        private readonly iUserService _serviceUser;
-
-
-        //Constructor
-        public RegisterModel(iUserService userService)
+        private readonly IUserService _service;
+        public RegisterModel(IUserService service)
         {
-            this._serviceUser = userService;
+            _service = service;
         }
-
-
-        //Methods
         public void OnGet()
         {
-            //Unused
         }
-
         public void OnPost()
         {
-            var email = Request.Form["emailaddress"];
-
+            var email = Request.Form["email"];
             try
             {
-                this._serviceUser.AddNewUser(email);
+                _service.AddNewUser(email);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.ToString());
             }

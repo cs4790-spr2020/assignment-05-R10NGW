@@ -2,50 +2,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlabberApp.Domain.Entities;
+using BlabberApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BlabberApp.Domain.Entities;
-using BlabberApp.Services.Interfaces;
 
 namespace BlabberApp.Client.Pages
 {
     public class FeedModel : PageModel
     {
-        //Attributes
-        private readonly iBlabService _serviceBlab;
-
-        private readonly iUserService _serviceUser;
-
-
-        //Constructor
-        public FeedModel(iBlabService blabService, iUserService userService)
+        private readonly IBlabService _service;
+        public FeedModel(IBlabService service)
         {
-            this._serviceBlab = blabService;
-            this._serviceUser = userService;
+            _service = service;
         }
-
-
-        //Methods
         public void OnGet()
         {
-            //Unused
         }
-
         public void OnPost()
         {
-            var email = Request.Form["emailaddress"];
+            var email = Request.Form["email"];
             var message = Request.Form["message"];
-
             try
             {
-                User user = this._serviceUser.FindUser(email);
-                Blab blab = this._serviceBlab.CreateBlab(message, user);
-
-                this._serviceBlab.AddBlab(blab);
+                _service.AddBlab(new Blab(message, new Domain.Entities.User(email)));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new Exception("FeedModel::OnPost: " + ex.ToString());
+                throw new Exception(ex.ToString());
             }
         }
     }

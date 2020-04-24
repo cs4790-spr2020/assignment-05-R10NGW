@@ -2,7 +2,10 @@ using System.Collections;
 
 namespace BlabberApp.DataStore.Interfaces
 {
-    public interface iBlabPlugin: iPlugin
+    /// <summary>
+    /// Not sure what this does, but Don had it.
+    /// </summary>
+    public interface IBlabPlugin : IPlugin
     {
         IEnumerable ReadByUserId(string Id);
     }

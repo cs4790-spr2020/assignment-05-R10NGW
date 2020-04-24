@@ -1,82 +1,69 @@
 using System;
 using System.Net.Mail;
 using BlabberApp.Domain.Interfaces;
-
 namespace BlabberApp.Domain.Entities
 {
-    public class User : iEntity
+    /// <summary>
+    /// I have rewritten Blab and User to match Don's
+    /// This ensures that the sql given works!
+    /// 
+    /// User is the User equivalent to Twitter.
+    /// </summary>
+    public class User : IEntity
     {
-        //Properties
-        public Guid Id { get; set; }
-
-        public DateTime RegisterDTTM { get; set; }
-
-        public DateTime LastLoginDTTM { get; set; }
-
-        public string Email {get; private set; }
-
-
-        //Constrcutors
+        /// <summary>
+        /// Getters/Setters
+        /// </summary>
+        public Guid Id {get; set;}
+        public System.DateTime RegisterDTTM { get; set; }
+        public System.DateTime LastLoginDTTM { get; set; }
+        public string Email { get; private set; }
+        /// <summary>
+        /// Creates a Blank User
+        /// </summary>
         public User()
         {
-            this.Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
-
+        /// <summary>
+        /// Creates a User with an email
+        /// </summary>
+        /// <param name="email">User email</param>
         public User(string email)
         {
-            this.Id = Guid.NewGuid();
-            this.ChangeEmail(email);
+            Id = Guid.NewGuid();
+            ChangeEmail(email); 
         }
-
-
-        //Methods
+        /// <summary>
+        /// Changes the email of this user object.
+        /// </summary>
+        /// <param name="email">New email</param>
         public void ChangeEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email) || email.Length > 50)
+                throw new FormatException("Email is invalid");
+            try
             {
-                throw new FormatException("Invalid email");
+                MailAddress m = new MailAddress(email); 
             }
-
-            try 
+            catch (FormatException)
             {
-                MailAddress m = new MailAddress(email);
+                throw new FormatException(email + " is invalid");
             }
-            catch(FormatException)
-            {
-                throw new FormatException("Invalid email");
-            }
-
-            this.Email = email;
+            Email = email;
         }
-
-        public bool IsValid()
-        {
-            if(this.Id == null)
-            {
-                throw new ArgumentNullException("Id", "null Id");
-            }
-
-            if(this.Email == null)
-            {
-                throw new ArgumentNullException("Email", "null Email");
-            }
-
-            if(this.Email.ToString() == "")
-            {
-                throw new FormatException("Invalid email");
-            }
-
-            if(this.LastLoginDTTM == null)
-            {
-                throw new ArgumentNullException("LastLoginDTTM", "null LastLoginDTTM");
-            }
-
-            if(this.RegisterDTTM == null)
-            {
-                throw new ArgumentNullException("RegisterDTTM", "null RegisterDTTM");
-            }
-
-            return true;
-        }
+        /// <summary>
+        /// Checks to see if this is a valid user.
+        /// </summary>
+        /// <returns></returns>
+        //public bool IsValid()
+        //{
+        //    if (Id == null) throw new ArgumentNullException();
+        //    if (Email == null) throw new ArgumentNullException();
+        //    if (Email.ToString() == "") throw new FormatException();
+        //    if (LastLoginDTTM == null) throw new ArgumentNullException();
+        //    if (RegisterDTTM == null) throw new ArgumentNullException();
+        //    return true;
+        //}
     }
 }

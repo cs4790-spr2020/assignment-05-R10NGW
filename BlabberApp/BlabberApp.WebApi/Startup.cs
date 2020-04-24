@@ -13,6 +13,9 @@ using Microsoft.Extensions.Logging;
 
 namespace BlabberApp.WebApi
 {
+    /// <summary>
+    /// Copied Don's code, kept comments.  Need to ask questions about this.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)

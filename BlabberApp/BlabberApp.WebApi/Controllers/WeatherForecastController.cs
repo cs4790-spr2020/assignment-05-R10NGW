@@ -7,6 +7,9 @@ using Microsoft.Extensions.Logging;
 
 namespace BlabberApp.WebApi.Controllers
 {
+    /// <summary>
+    /// Same as Don's because Don's works
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase

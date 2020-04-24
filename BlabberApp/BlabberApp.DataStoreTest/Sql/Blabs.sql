@@ -1,2 +1,2 @@
-SELECT * FROM 'blabs' LIMIT 1000;
-TRUNCATE 'blabs';
+SELECT * FROM `blabs` LIMIT 1000;
+TRUNCATE `blabs`;

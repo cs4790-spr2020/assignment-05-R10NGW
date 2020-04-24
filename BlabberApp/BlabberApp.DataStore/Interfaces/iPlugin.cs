@@ -4,16 +4,15 @@ using BlabberApp.Domain.Interfaces;
 
 namespace BlabberApp.DataStore.Interfaces
 {
-    public interface iPlugin
+    /// <summary>
+    /// Crud interface as a plugin.
+    /// </summary>
+    public interface IPlugin
     {
-        void Create(iEntity obj);
-
+        void Create(IEntity obj);
         IEnumerable ReadAll();
-
-        iEntity ReadById(Guid id);
-
-        void Update(iEntity obj);
-        
-        void Delete(iEntity obj);
+        IEntity ReadById(Guid Id);
+        void Update(IEntity obj);
+        void Delete(IEntity obj);
     }
 }

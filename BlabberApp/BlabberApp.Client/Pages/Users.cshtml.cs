@@ -4,27 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BlabberApp.Services.Interfaces;
+using BlabberApp.Services;
 
 namespace BlabberApp.Client.Pages
 {
     public class UsersModel : PageModel
     {
-        //Attributes
-        private readonly iUserService _serviceUser;
-
-
-        //Constructor
-        public UsersModel(iUserService userService)
+        private readonly IUserService _service;
+        public UsersModel(IUserService service)
         {
-            this._serviceUser = userService;
+            _service = service;
         }
-
-
-        //Methods
         public void OnGet()
         {
-            //Unused
         }
     }
 }

@@ -2,8 +2,11 @@ using BlabberApp.Domain.Interfaces;
 
 namespace BlabberApp.DataStore.Interfaces
 {
-    public interface iUserPlugin : iPlugin
+    /// <summary>
+    /// Not sure what this is, but Don had it.
+    /// </summary>
+    public interface IUserPlugin : IPlugin
     {
-        iEntity ReadByUserEmail(string email);
+        IEntity ReadByUserEmail(string email);
     }
 }

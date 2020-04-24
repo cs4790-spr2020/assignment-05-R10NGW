@@ -7,46 +7,72 @@ namespace BlabberApp.DataStore.Adapters
 {
     public class UserAdapter
     {
-        //Attributes
-        private iUserPlugin plugin;
+        //Plugin does all the work
+       private readonly IUserPlugin Plugin;
 
+        /// <summary>
+        /// Constructor for UserAdapter
+        /// </summary>
+        /// <param name="plugin"></param>
+       public UserAdapter(IUserPlugin plugin)
+       {
+           Plugin = plugin;
+       }
 
-        //Constructor
-        public UserAdapter(iUserPlugin plugin) 
-        {
-            this.plugin = plugin;
-        }
+        /// <summary>
+        /// Creates a user
+        /// </summary>
+        /// <param name="user">User to create</param>
+       public void Add(User user)
+       {
+           Plugin.Create(user);
+       }
 
+        /// <summary>
+        /// Delete User
+        /// </summary>
+        /// <param name="user">User to delete</param>
+       public void Remove(User user)
+       {
+           Plugin.Delete(user);
+       }
 
-        //Methods
-        public void Add(User user)
-        {
-            this.plugin.Create(user);
-        }
+        /// <summary>
+        /// Updates User
+        /// </summary>
+        /// <param name="user">User to update</param>
+       public void Update(User user)
+       {
+           Plugin.Update(user);
+       }
 
-        public void Remove(User user)
-        {
-            this.plugin.Delete(user);
-        }
+        /// <summary>
+        /// Get all available Users
+        /// </summary>
+        /// <returns>IEnumerable of User objects</returns>
+       public IEnumerable GetAll()
+       {
+           return Plugin.ReadAll();
+       }
 
-        public void Update(User user)
-        {
-            this.plugin.Update(user);
-        }
+        /// <summary>
+        /// Gets a User by GUID
+        /// </summary>
+        /// <param name="Id">GUID of User</param>
+        /// <returns>The user associated with the given GUID</returns>
+       public User GetById(Guid Id)
+       {
+           return (User)Plugin.ReadById(Id);
+       }
 
-        public IEnumerable GetAll()
-        {
-            return this.plugin.ReadAll();
-        }
-
-        public User GetById(Guid Id)
-        {
-            return (User)this.plugin.ReadById(Id);
-        }
-
-        public User GetByEmail(string email)
-        {
-            return (User)this.plugin.ReadByUserEmail(email);
-        }
+        /// <summary>
+        /// Gets a user by their email (unique?)
+        /// </summary>
+        /// <param name="email">Email of User</param>
+        /// <returns>User associated with the given email</returns>
+       public User GetByEmail(string email)
+       {
+           return (User)Plugin.ReadByUserEmail(email);
+       }
     }
 }

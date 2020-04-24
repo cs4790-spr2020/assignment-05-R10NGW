@@ -1,12 +1,10 @@
-﻿using Sys = System;
-
-namespace BlabberApp.Console
+﻿namespace BlabberApp.Console
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Sys.Console.WriteLine("Hello from the Console!");
+            System.Console.WriteLine("text");
         }
     }
 }

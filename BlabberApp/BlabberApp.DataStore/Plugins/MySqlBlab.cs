@@ -8,89 +8,106 @@ using BlabberApp.Domain.Interfaces;
 
 namespace BlabberApp.DataStore.Plugins
 {
-    public class MySqlBlab : iBlabPlugin
+    /// <summary>
+    /// Stores Blabs in the database
+    /// </summary>
+    public class MySqlBlab : IBlabPlugin
     {
-        //Attributes
-        MySqlConnection dcBlab;
-
-
-        //Constructor
+        /// <summary>
+        /// Connection to the database
+        /// </summary>
+        MySqlConnection conn;
+        /// <summary>
+        /// Constructor for Database object
+        /// </summary>
         public MySqlBlab()
         {
-            this.dcBlab = new MySqlConnection("server=142.93.114.73;database=R10NGW;user=R10NGW;password=letmein");
-
+            //Example Connection
+            //this.dcBlab = new MySqlConnection("server=142.93.114.73;database=donbstringham;user=donbstringham;password=letmein");
+            conn = new MySqlConnection("server=142.93.114.73;database=R10NGW;user=R10NGW;password=letmein");
             try
             {
-                this.dcBlab.Open();
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+                conn.Open();
+            }catch (Exception ex){throw new Exception(ex.ToString());}
         }
-
-
-        //Methods
+        /// <summary>
+        /// Closes connection to database
+        /// </summary>
         public void Close()
         {
-            this.dcBlab.Close();
+            conn.Close();
         }
-
-        public void Create(iEntity obj)
-        {
-            Blab blab = (Blab)obj;
-
+        /// <summary>
+        /// Creates a Blab object in the database
+        /// </summary>
+        /// <param name="obj"></param>
+        public void Create(IEntity obj)
+        {   
             try
             {
+                Blab blab = (Blab)obj;
                 DateTime now = DateTime.Now;
-
+                //Use Don's SQL, it worked when he did it. Don't change
                 string sql = "INSERT INTO blabs (sys_id, message, dttm_created, user_id) VALUES ('"
-                    + blab.Id + "', '"
-                    + blab.Message + "', '"
-                    + now.ToString("yyyy-MM-dd HH:mm:ss") + "', '"
-                    + blab.User.Email + "')";
-                
-                MySqlCommand cmd = new MySqlCommand(sql, this.dcBlab);
+                     + blab.Id + "', '"
+                     + blab.Message + "', '"
+                     + now.ToString("yyyy-MM-dd HH:mm:ss") + "', '"
+                     + blab.User.Email + "')";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
             }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+            catch (Exception ex) { throw new Exception(ex.ToString()); }
         }
-
+        /// <summary>
+        /// Returns all Blabs from the database
+        /// </summary>
+        /// <returns>IEnumerable of Blab objects</returns>
         public IEnumerable ReadAll()
         {
             try
             {
                 string sql = "SELECT * FROM blabs";
-                MySqlDataAdapter daBlabs = new MySqlDataAdapter(sql, this.dcBlab);
+                //string sql = "Truncate table blabs";
+                MySqlDataAdapter daBlabs = new MySqlDataAdapter(sql, this.conn); // To avoid SQL injection.
                 MySqlCommandBuilder cbBlabs = new MySqlCommandBuilder(daBlabs);
                 DataSet dsBlabs = new DataSet();
 
                 daBlabs.Fill(dsBlabs);
 
-                ArrayList blabs = new ArrayList();
+                ArrayList alBlabs = new ArrayList();
 
-                foreach(DataRow dtRow in dsBlabs.Tables[0].Rows)
+                foreach( DataRow dtRow in dsBlabs.Tables[0].Rows)
                 {
-                    blabs.Add(ConvertDataRowToBlab(dtRow));
+                    alBlabs.Add(DataRow2Blab(dtRow));
                 }
-
-                return blabs;
+                
+                return alBlabs;
             }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+            catch (Exception ex) { throw new Exception(ex.ToString()); }
         }
 
-        public iEntity ReadById(Guid Id)
+        private Blab DataRow2Blab(DataRow row)
+        {
+            Blab blab = new Blab();
+
+            blab.Id = new Guid(row["sys_id"].ToString());
+            blab.Message = (string)row["message"];
+            blab.User = new User((string)row["user_id"].ToString());
+
+            return blab;
+        }
+        /// <summary>
+        /// Read Blab by GUID
+        /// </summary>
+        /// <param name="Id">GUID of Blab</param>
+        /// <returns>Blab associated with GUID</returns>
+        public IEntity ReadById(Guid Id)
         {
             try
             {
+                //Don't change Don's SQL
                 string sql = "SELECT * FROM blabs WHERE blabs.sys_id = '" + Id.ToString() + "'";
-                MySqlDataAdapter daBlab = new MySqlDataAdapter(sql, this.dcBlab);
+                MySqlDataAdapter daBlab = new MySqlDataAdapter(sql, conn); // To avoid SQL injection.
                 MySqlCommandBuilder cbBlab = new MySqlCommandBuilder(daBlab);
                 DataSet dsBlab = new DataSet();
 
@@ -103,76 +120,60 @@ namespace BlabberApp.DataStore.Plugins
 
                 return blab;
             }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+            catch (Exception ex) { throw new Exception(ex.ToString()); }
         }
-
+        /// <summary>
+        /// Returns Blabs associated with a User email
+        /// </summary>
+        /// <param name="email">User email</param>
+        /// <returns>IEnumerable of Blabs from User</returns>
         public IEnumerable ReadByUserId(string email)
         {
             try
             {
+                //Don't change Don's SQL
                 string sql = "SELECT * FROM blabs WHERE blabs.user_id = '" + email.ToString() + "'";
-                MySqlDataAdapter daBlabs = new MySqlDataAdapter(sql, this.dcBlab);
+                MySqlDataAdapter daBlabs = new MySqlDataAdapter(sql, conn); // To avoid SQL injection.
                 MySqlCommandBuilder cbBlabs = new MySqlCommandBuilder(daBlabs);
                 DataSet dsBlabs = new DataSet();
 
                 daBlabs.Fill(dsBlabs);
 
-                ArrayList blabs = new ArrayList();
+                ArrayList alBlabs = new ArrayList();
 
-                foreach(DataRow dtRow in dsBlabs.Tables[0].Rows)
+                foreach( DataRow dtRow in dsBlabs.Tables[0].Rows)
                 {
-                    blabs.Add(ConvertDataRowToBlab(dtRow));
+                    alBlabs.Add(dtRow);
                 }
-
-                return blabs;
-            }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
-        }
-
-        public void Update(iEntity obj)
+                
+                return alBlabs;
+            }catch (Exception ex){throw new Exception(ex.ToString());
+    }
+}
+        /// <summary>
+        /// I don't believe this works, but I'll troubleshoot it later.
+        /// </summary>
+        /// <param name="obj"></param>
+        public void Update(IEntity obj)
         {
-            Blab blab = (Blab)obj;
-
-            this.Delete(blab);
-            this.Create(blab);
-        }
-
-        public void Delete(iEntity obj)
-        {
-            Blab blab = (Blab)obj;
-
             try
             {
-                string sql = "DELETE FROM blabs WHERE blabs.sys_id = '" + blab.Id + "'";
-                
-                MySqlCommand cmd = new MySqlCommand(sql, this.dcBlab);
-                cmd.ExecuteNonQuery();
+                Blab blab = (Blab)obj;
             }
-            catch(Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
+            catch (Exception ex) { throw new Exception(ex.ToString()); }
         }
 
-        private Blab ConvertDataRowToBlab(DataRow row)
+        /// <summary>
+        /// I don't believe this works, but I'll troubleshoot it later.
+        /// </summary>
+        /// <param name="obj"></param>
+        public void Delete(IEntity obj)
         {
-            User user = new User();
-
-            user.ChangeEmail(row["user_id"].ToString());
-
-            Blab blab = new Blab(user);
-
-            blab.Id = new Guid(row["sys_id"].ToString());
-            blab.Message = row["message"].ToString();
-            blab.DTTM = (DateTime)row["dttm_created"];
-
-            return blab;
+            try
+            {
+                Blab blab = (Blab)obj;
+            }
+            catch (Exception ex) { throw new Exception(ex.ToString()); }
         }
     }
 }

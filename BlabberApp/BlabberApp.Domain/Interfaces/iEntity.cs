@@ -2,7 +2,10 @@
 
 namespace BlabberApp.Domain.Interfaces
 {
-    public interface iEntity
+    /// <summary>
+    /// Ensures that each object has unique identifier. Hopefully...
+    /// </summary>
+    public interface IEntity
     {
         Guid Id { get; }
     }

@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace BlabberApp.WebApi
 {
+    /// <summary>
+    /// Same as Don's because Don's works
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)

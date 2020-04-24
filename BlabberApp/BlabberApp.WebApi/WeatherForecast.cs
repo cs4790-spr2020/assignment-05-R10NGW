@@ -2,6 +2,9 @@ using System;
 
 namespace BlabberApp.WebApi
 {
+    /// <summary>
+    /// Same as Don's because Don's works
+    /// </summary>
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
